@@ -5,8 +5,6 @@ from .models import *
 
 # Create your views here.
 
-# def home(request):
-#     return render(request, 'app/home.html')
 
 class ProductView(View):
     def get(self,request):
@@ -22,10 +20,10 @@ class ProductView(View):
 
         })
 
-
-
-def product_detail(request):
-    return render(request, 'app/productdetail.html')
+class ProductDetailView(View):
+    def get(self,request,pk):
+        product=Product.objects.get(pk=pk)
+        return render(request,'app/productdetail.html',{'product':product})
 
 
 def add_to_cart(request):
