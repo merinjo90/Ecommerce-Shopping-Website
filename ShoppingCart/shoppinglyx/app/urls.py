@@ -15,6 +15,7 @@ urlpatterns = [
     path('orders/', orders, name='orders'),
     path('changepassword/', change_password, name='changepassword'),
     path('mobile/', mobile, name='mobile'),
+    path('mobile/<slug:data>', mobile, name='mobiledata'),
     path('login/', login, name='login'),
     path('registration/', customerregistration, name='customerregistration'),
     path('checkout/', checkout, name='checkout'),
