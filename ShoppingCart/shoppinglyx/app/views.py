@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.views import View
 from .models import *
+from .forms import *
+from django.contrib import messages
 
 
 # Create your views here.
 
+# -----------Products ------------------------------
 
 class ProductView(View):
     def get(self, request):
@@ -20,6 +23,8 @@ class ProductView(View):
 
         })
 
+
+# ----------- Product Detailes -----------------------------
 
 class ProductDetailView(View):
     def get(self, request, pk):
@@ -51,6 +56,8 @@ def change_password(request):
     return render(request, 'app/changepassword.html')
 
 
+# ------------------- Detailed Mobile data --------------------------------
+
 def mobile(request, data=None):
     if data == None:
         mobiles = Product.objects.filter(category='M')
@@ -61,15 +68,26 @@ def mobile(request, data=None):
     elif data == 'above':
         mobiles = Product.objects.filter(category='M').filter(discounted_price__gt=10000)
 
-    return render(request, 'app/mobile.html',context= {'mobiles': mobiles})
+    return render(request, 'app/mobile.html', context={'mobiles': mobiles})
 
 
 def login(request):
     return render(request, 'app/login.html')
 
 
-def customerregistration(request):
-    return render(request, 'app/customerregistration.html')
+# ---------------- Registration ------------------------------------
+
+class CustomerRegistrationView(View):
+    def get(self, request):
+        form = CustomerRegistrationForm()
+        return render(request, 'app/customerregistration.html', {'form': form})
+
+    def post(self, request):
+        form = CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            messages.success(request,'Congratulations!! Registered succesfully')
+            form.save()
+        return render(request, 'app/customerregistration.html', {'form': form})
 
 
 def checkout(request):
