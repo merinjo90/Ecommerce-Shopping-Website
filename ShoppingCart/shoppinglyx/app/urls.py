@@ -4,7 +4,10 @@ from .views import *
 
 
 urlpatterns = [
-    path('', home),
+    # path('', home,name='home'),
+
+    path('',ProductView.as_view(),name='home'),
+
     path('product-detail/', product_detail, name='product-detail'),
     path('cart/', add_to_cart, name='add-to-cart'),
     path('buy/', buy_now, name='buy-now'),
