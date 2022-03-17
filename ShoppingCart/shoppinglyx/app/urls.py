@@ -21,6 +21,9 @@ urlpatterns = [
     path('orders/', orders, name='orders'),
     path('mobile/', mobile, name='mobile'),
     path('mobile/<slug:data>', mobile, name='mobiledata'),
+    path('checkout/', checkout, name='checkout'),
+    path('paymentdone/', payment_done, name='paymentdone'),
+
     path('accounts/login/', auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm),name='login'),
     # path('login/', login, name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
@@ -39,5 +42,4 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'),name='password_reset_complete'),
 
     path('registration/', CustomerRegistrationView.as_view(), name='customerregistration'),
-    path('checkout/', checkout, name='checkout'),
 ]
