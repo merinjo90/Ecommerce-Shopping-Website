@@ -39,3 +39,43 @@ $('.plus-cart').click(function() {
         }
     })
 })
+
+
+
+$('.minus-cart').click(function() {
+    var id = $(this).attr("pid").toString();
+    var elm = this.parentNode.children[2]
+    //console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"/minuscart",
+        data:{
+            prod_id: id
+        },
+        success: function(data){
+            elm.innerText = data.quantity
+            document.getElementById("amount").innerText = data.amount
+            document.getElementById("totalamount").innerText = data.totalamount
+        }
+    })
+})
+
+
+$('.remove-cart').click(function() {
+    var id = $(this).attr("pid").toString();
+    var elm = this
+    //console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"/removecart",
+        data:{
+            prod_id: id
+        },
+        success: function(data){
+            console.log("Delete")
+            document.getElementById("amount").innerText = data.amount
+            document.getElementById("totalamount").innerText = data.totalamount
+            elm.parentNode.parentNode.parentNode.parentNode.remove()
+        }
+    })
+})
