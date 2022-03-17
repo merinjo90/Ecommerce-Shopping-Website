@@ -20,7 +20,7 @@ This is a web application built in Django that helps user to purchase things
      HTML
      CSS
      Bootstrap5
-     Sqlite3
+     MySql
      JavaScript
      Jquery
 
